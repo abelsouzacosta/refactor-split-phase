@@ -16,12 +16,16 @@ type Product = {
 // second: calculate discount
 // third: calculate shipping cost
 // fourth: calculate the total order price
+export function getBasePrice(product: Product, quantity: number): number {
+  return product.basePrice * quantity;
+}
+
 export function priceOrder(
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
 ) {
-  let basePrice = product.basePrice * quantity;
+  let basePrice = getBasePrice(product, quantity);
 
   let discount =
     Math.max(quantity - product.discountThreshold, 0) *
