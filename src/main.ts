@@ -25,21 +25,19 @@ export function priceOrder(
   quantity: number,
   shippingMethod: ShippingMethod
 ) {
-  let basePrice = getBasePrice(product, quantity);
-
   let discount =
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
     product.discountRate;
 
   let shippingPerCase =
-    basePrice > shippingMethod.discountThreshold
+    getBasePrice(product, quantity) > shippingMethod.discountThreshold
       ? shippingMethod.discountFee
       : shippingMethod.feePerCase;
 
   let shippingCost = quantity * shippingPerCase;
 
-  let price = basePrice - discount + shippingCost;
+  let price = getBasePrice(product, quantity) - discount + shippingCost;
 
   return price;
 }
