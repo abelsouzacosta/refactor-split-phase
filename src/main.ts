@@ -10,7 +10,13 @@ type Product = {
   discountRate: number;
 };
 
-function priceOrder(
+// todo: [refactor] - split phases
+// this code has four responsibilities
+// first: calculate the base price
+// second: calculate discount
+// third: calculate shipping cost
+// fourth: calculate the total order price
+export function priceOrder(
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
