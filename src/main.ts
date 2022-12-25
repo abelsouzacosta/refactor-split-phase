@@ -20,15 +20,20 @@ export function getBasePrice(product: Product, quantity: number): number {
   return product.basePrice * quantity;
 }
 
+function getDiscount(product: Product, quantity: number): number {
+  return (
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate
+  );
+}
+
 export function priceOrder(
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
 ) {
-  let discount =
-    Math.max(quantity - product.discountThreshold, 0) *
-    product.basePrice *
-    product.discountRate;
+  let discount = getDiscount(product, quantity);
 
   let shippingPerCase =
     getBasePrice(product, quantity) > shippingMethod.discountThreshold
