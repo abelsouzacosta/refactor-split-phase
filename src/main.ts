@@ -46,12 +46,10 @@ export function priceOrder(
   quantity: number,
   shippingMethod: ShippingMethod
 ) {
-  let shippingCost = getShippingCost(product, quantity, shippingMethod);
-
   let price =
     getBasePrice(product, quantity) -
     getDiscount(product, quantity) +
-    shippingCost;
+    getShippingCost(product, quantity, shippingMethod);
 
   return price;
 }
