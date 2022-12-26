@@ -28,17 +28,25 @@ function getDiscount(product: Product, quantity: number): number {
   );
 }
 
-export function priceOrder(
+function getShippingCost(
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
-) {
+): number {
   let shippingPerCase =
     getBasePrice(product, quantity) > shippingMethod.discountThreshold
       ? shippingMethod.discountFee
       : shippingMethod.feePerCase;
 
-  let shippingCost = quantity * shippingPerCase;
+  return quantity * shippingPerCase;
+}
+
+export function priceOrder(
+  product: Product,
+  quantity: number,
+  shippingMethod: ShippingMethod
+) {
+  let shippingCost = getShippingCost(product, quantity, shippingMethod);
 
   let price =
     getBasePrice(product, quantity) -
