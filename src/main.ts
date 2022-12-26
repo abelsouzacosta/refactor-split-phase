@@ -20,7 +20,7 @@ export function basePrice(product: Product, quantity: number): number {
   return product.basePrice * quantity;
 }
 
-function getDiscount(product: Product, quantity: number): number {
+function discount(product: Product, quantity: number): number {
   return (
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
@@ -48,7 +48,7 @@ export function priceOrder(
 ) {
   return (
     basePrice(product, quantity) -
-    getDiscount(product, quantity) +
+    discount(product, quantity) +
     getShippingCost(product, quantity, shippingMethod)
   );
 }
