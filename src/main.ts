@@ -16,7 +16,7 @@ type Product = {
 // second: calculate discount
 // third: calculate shipping cost
 // fourth: calculate the total order price
-export function getBasePrice(product: Product, quantity: number): number {
+export function basePrice(product: Product, quantity: number): number {
   return product.basePrice * quantity;
 }
 
@@ -34,7 +34,7 @@ function getShippingCost(
   shippingMethod: ShippingMethod
 ): number {
   let shippingPerCase =
-    getBasePrice(product, quantity) > shippingMethod.discountThreshold
+    basePrice(product, quantity) > shippingMethod.discountThreshold
       ? shippingMethod.discountFee
       : shippingMethod.feePerCase;
 
@@ -47,7 +47,7 @@ export function priceOrder(
   shippingMethod: ShippingMethod
 ) {
   return (
-    getBasePrice(product, quantity) -
+    basePrice(product, quantity) -
     getDiscount(product, quantity) +
     getShippingCost(product, quantity, shippingMethod)
   );
