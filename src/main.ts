@@ -28,7 +28,7 @@ function discount(product: Product, quantity: number): number {
   );
 }
 
-function getShippingCost(
+function shippingCost(
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
@@ -49,7 +49,7 @@ export function priceOrder(
   return (
     basePrice(product, quantity) -
     discount(product, quantity) +
-    getShippingCost(product, quantity, shippingMethod)
+    shippingCost(product, quantity, shippingMethod)
   );
 }
 
